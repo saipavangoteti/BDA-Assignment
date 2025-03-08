@@ -1,7 +1,0 @@
-    1. Clearer Data Representation: The code now explicitly uses tuples (rank, neighbors) to represent the original node data and floats for rank contributions. This makes the logic in the reducer much cleaner.
-    2. Dangling Node Handling: The mapper now checks for dangling nodes (nodes with no outgoing links) to avoid division by zero errors. It simply doesn't distribute rank from a dangling node.
-    3. Type Handling in Reducer: The reducer now includes a try-except block to handle potential ValueError exceptions when parsing the values. This makes the code more robust to malformed input. It also checks if the value is a tuple (original data) or a float (rank contribution).
-    4. Explicit Damping Factor: The PageRank calculation now includes the damping factor d (set to 0.85 in this example) explicitly.
-    5. Re-emitting Graph Structure: The reducer now correctly re-emits the graph structure (node and its neighbors) along with the updated PageRank value. This is crucial for the next iteration of MapReduce.
-    6. Output Format: The output format from the reducer is now consistent with the input format, making it easy to chain multiple MapReduce jobs. It's node\tRank|neighbor1,neighbor2,...
-    7. Convergence: The code doesn't include explicit convergence checking. You would typically implement this in a driver script that runs the MapReduce job multiple times. After each iteration, you'd compare the PageRank values with the previous iteration. If the changes are below a certain threshold, you consider the algorithm to have converged.
